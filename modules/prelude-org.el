@@ -56,6 +56,8 @@
 
 (setq prelude-org-mode-hook 'prelude-org-mode-defaults)
 
+(add-hook 'org-mode-hook 'org-indent-mode)
+
 (add-hook 'org-mode-hook (lambda () (run-hooks 'prelude-org-mode-hook)))
 
 (provide 'prelude-org)

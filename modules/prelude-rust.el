@@ -40,13 +40,9 @@
 (prelude-require-packages '(rust-mode
                             cargo
                             flycheck-rust
-                            tree-sitter
-                            tree-sitter-langs
                             yasnippet
                             ron-mode))
 
-(require 'tree-sitter)
-(require 'tree-sitter-langs)
 
 (add-to-list 'super-save-predicates
              (lambda () (not (eq major-mode 'rust-mode))))
@@ -58,9 +54,6 @@
   ;; enable lsp for rust, by default it uses rust-analyzer as lsp server
   (add-hook 'rust-mode-hook 'lsp)
 
-  ;; enable tree-sitter for nicer syntax highlighting
-  (add-hook 'rust-mode-hook #'tree-sitter-mode)
-  (add-hook 'rust-mode-hook #'tree-sitter-hl-mode)
 
   (defun prelude-rust-mode-defaults ()
     ;; format on save

@@ -37,6 +37,26 @@
 (global-set-key "\C-cc" 'org-capture)
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+;; defining org-agenda files
+(setq org-agenda-files (list "~/Dropbox/orgfiles/gcal.org"
+                             "~/Dropbox/orgfiles/i.org"
+                             "~/Dropbox/orgfiles/schedule.org"))
+;; define our org-capture templates
+(setq org-capture-templates
+      '(("a" "Appointment" entry (file  "~/Dropbox/orgfiles/gcal.org" )
+         "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+        ("l" "Link" entry (file+headline "~/Dropbox/orgfiles/links.org" "Links")
+         "* %? %^L %^g \n%T" :prepend t)
+        ("b" "Blog idea" entry (file+headline "~/Dropbox/orgfiles/i.org" "Blog Topics:")
+         "* %?\n%T" :prepend t)
+        ("t" "To Do Item" entry (file+headline "~/Dropbox/orgfiles/i.org" "To Do")
+         "* TODO %?\n%u" :prepend t)
+        ("n" "Note" entry (file+headline "~/Dropbox/orgfiles/i.org" "Note space")
+         "* %?\n%u" :prepend t)
+        ("j" "Journal" entry (file+datetree "~/Dropbox/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ("s" "Screencast" entry (file "~/Dropbox/orgfiles/screencastnotes.org")
+         "* %?\n%i\n")))
 
 ;; Crack our secrets vault open
 (load "~/.emacs.d/personal/preload/vault.el.gpg")
@@ -44,26 +64,3 @@
 ;; org-gcal setup
 (org-gcal-reload-client-id-secret)
 (add-to-list 'plstore-encrypt-to 'E10A9B132DD86E93)
-
-;; Org capture templates
-  (setq org-capture-templates
-        '(("t" "Tasks" entry
-           (file+headline "inbox.org" "Tasks")
-           "* TODO %^{Task}")
-          ("a" "Appointment" entry
-           (file "personal/gcal.org")
-           "* %?\n :PROPERTIES:\n :calendar-id: me@gmail.com\n :END:\n:org-gcal:\n%^T--%^T\n:END:\n"
-           :jump-to-captured t)
-          ("d" "Due Date" entry
-           (file "personal/gcal.org")
-           "* %?\n :PROPERTIES:\n :calendar-id: me@gmail.com\n :END:\n:org-gcal:\n%^T\n:END:\n")
-          ("w" "Work Notebooks")
-          ("ws" "S-Corp" entry
-           (file+olp+datetree "work/work-s-corp.org")
-           "* %?"
-           :clock-in t
-           :clock-keep t
-           :time-prompt t
-           :immediate-finish t
-           :jump-to-captured t)
-         ))

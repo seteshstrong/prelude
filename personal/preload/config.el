@@ -36,10 +36,7 @@
 (global-set-key "\C-cc" 'org-capture)
 
 ;; Crack our secrets vault open
-(if (file-exists-p (expand-file-name vault.el.gpg))
-    (load-file (expand-file-name vault.el.gpg)))
-(if (file-exists-p (expand-file-name vault.el))
-    (load-file (expand-file-name vault.el)))
+
 
 ;; Org capture templates
   (setq org-capture-templates

@@ -33,3 +33,4 @@ var/
 gotools/
 eln-cache/
 /tree-sitter/
+/.org-generic-id-locations

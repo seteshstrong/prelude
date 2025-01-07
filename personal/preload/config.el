@@ -35,28 +35,31 @@
 
 ;; Org config tweaks
 (global-set-key "\C-cc" 'org-capture)
+;; Set org directory
+(setq org-directory "~/org")
+;; Set org archive location
+(setq org-archive-location "~/org/archive.org")
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 ;; defining org-agenda files
-(setq org-agenda-files (list "~/Dropbox/orgfiles/gcal.org"
-                             "~/Dropbox/orgfiles/i.org"
-                             "~/Dropbox/orgfiles/schedule.org"))
+(setq org-agenda-files (list "~/org/gcal.org"
+                             "~/org/i.org"
+                             "~/org/schedule.org"))
 ;; define our org-capture templates
 (setq org-capture-templates
-      '(("a" "Appointment" entry (file  "~/Dropbox/orgfiles/gcal.org" )
+      '(("a" "Appointment" entry (file  "~/org/gcal.org" )
          "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
-        ("l" "Link" entry (file+headline "~/Dropbox/orgfiles/links.org" "Links")
+        ("l" "Link" entry (file+headline "~/org/links.org" "Links")
          "* %? %^L %^g \n%T" :prepend t)
-        ("b" "Blog idea" entry (file+headline "~/Dropbox/orgfiles/i.org" "Blog Topics:")
+        ("b" "Blog idea" entry (file+headline "~/org/i.org" "Blog Topics:")
          "* %?\n%T" :prepend t)
-        ("t" "To Do Item" entry (file+headline "~/Dropbox/orgfiles/i.org" "To Do")
+        ("t" "To Do Item" entry (file+headline "~/org/i.org" "To Do")
          "* TODO %?\n%u" :prepend t)
-        ("n" "Note" entry (file+headline "~/Dropbox/orgfiles/i.org" "Note space")
+        ("n" "Note" entry (file+headline "~/org/notes.org" "Note space")
          "* %?\n%u" :prepend t)
-        ("j" "Journal" entry (file+datetree "~/Dropbox/journal.org")
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
-        ("s" "Screencast" entry (file "~/Dropbox/orgfiles/screencastnotes.org")
-         "* %?\n%i\n")))
+        ))
 
 ;; Crack our secrets vault open
 (load "~/.emacs.d/personal/preload/vault.el.gpg")

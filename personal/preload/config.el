@@ -34,7 +34,10 @@
       '((:source "~/.authinfo.gpg")))
 
 ;; Org config tweaks
+;; custom keys
 (global-set-key "\C-cc" 'org-capture)
+;; formatting
+(setq org-hide-leading-stars t)
 ;; Set org directory
 (setq org-directory "~/org")
 ;; Set org archive location
@@ -45,15 +48,17 @@
 (setq org-agenda-files (list "~/org/gcal.org"
                              "~/org/i.org"
                              "~/org/schedule.org"))
+;; org notes location
+(setq org-default-notes-file "~/org/notes.org")
 ;; define our org-capture templates
 (setq org-capture-templates
       '(("a" "Appointment" entry (file  "~/org/gcal.org" )
          "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
         ("l" "Link" entry (file+headline "~/org/links.org" "Links")
          "* %? %^L %^g \n%T" :prepend t)
-        ("b" "Blog idea" entry (file+headline "~/org/i.org" "Blog Topics:")
+        ("b" "Blog idea" entry (file+headline "~/org/blogs.org" "Blog Topics:")
          "* %?\n%T" :prepend t)
-        ("t" "To Do Item" entry (file+headline "~/org/i.org" "To Do")
+        ("t" "To Do Item" entry (file+headline "~/org/index.org" "To Do")
          "* TODO %?\n%u" :prepend t)
         ("n" "Note" entry (file+headline "~/org/notes.org" "Note space")
          "* %?\n%u" :prepend t)

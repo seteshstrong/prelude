@@ -34,3 +34,7 @@ gotools/
 eln-cache/
 /tree-sitter/
 /.org-generic-id-locations
+/.org-id-locations
+/oauth2-auto.plist
+/persist/org-generic-id--last-update-id-time
+/request/curl-cookie-jar

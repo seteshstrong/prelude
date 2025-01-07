@@ -7,6 +7,7 @@
 (require 'persist)
 (require 'aio)
 (require 'org-gcal)
+(require 'plstore)
 
 ;; Adjust theme
 (disable-theme 'zenburn)
@@ -34,9 +35,15 @@
 
 ;; Org config tweaks
 (global-set-key "\C-cc" 'org-capture)
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 ;; Crack our secrets vault open
+(load "~/.emacs.d/personal/preload/vault.el.gpg")
 
+;; org-gcal setup
+(org-gcal-reload-client-id-secret)
+(add-to-list 'plstore-encrypt-to 'E10A9B132DD86E93)
 
 ;; Org capture templates
   (setq org-capture-templates

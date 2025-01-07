@@ -72,3 +72,7 @@
 ;; org-gcal setup
 (org-gcal-reload-client-id-secret)
 (add-to-list 'plstore-encrypt-to 'E10A9B132DD86E93)
+
+;; diary file configs
+(setq diary-file "~/org/diary")
+(setq org-agenda-include-diary t)

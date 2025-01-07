@@ -6,8 +6,12 @@
 (require 'alert)
 (require 'persist)
 (require 'aio)
+(require 'oauth2-auto)
 (require 'org-gcal)
 (require 'plstore)
+
+;; startup with dashboard
+(dashboard-setup-startup-hook)
 
 ;; Adjust theme
 (disable-theme 'zenburn)
@@ -33,23 +37,32 @@
 (setq auth-sources
       '((:source "~/.authinfo.gpg")))
 
+
 ;; Org config tweaks
+
 ;; custom keys
 (global-set-key "\C-cc" 'org-capture)
+
 ;; formatting
 (setq org-hide-leading-stars t)
+
 ;; Set org directory
 (setq org-directory "~/org")
+
 ;; Set org archive location
-(setq org-archive-location "~/org/archive.org")
+(setq org-archive-location "%s_archive::")
+
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+
 ;; defining org-agenda files
 (setq org-agenda-files (list "~/org/gcal.org"
                              "~/org/index.org"
                              "~/org/schedule.org"))
+
 ;; org notes location
 (setq org-default-notes-file "~/org/notes.org")
+
 ;; define our org-capture templates
 (setq org-capture-templates
       '(("a" "Appointment" entry (file  "~/org/gcal.org" )
@@ -60,18 +73,24 @@
          "* %?\n%T" :prepend t)
         ("t" "To Do Item" entry (file+headline "~/org/index.org" "To Do")
          "* TODO %?\n%u" :prepend t)
-        ("n" "Note" entry (file+headline "~/org/notes.org" "Note space")
+        ("n" "Note" entry (file+headline "~/org/notes.org" "Note space")q
          "* %?\n%u" :prepend t)
         ("j" "Journal" entry (file+datetree "~/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
         ))
+
+;; org todo setup
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "ANALYSIS(a)" "NEXT(n)" "|" "DONE(0!)" "DELEGATED(1@)" "DISCARDED(d@)")))
+(setq org-enforce-todo-dependencies t)
+(setq org-log-done 'note)
 
 ;; Crack our secrets vault open
 (load "~/.emacs.d/personal/preload/vault.el.gpg")
 
 ;; org-gcal setup
 (org-gcal-reload-client-id-secret)
-(add-to-list 'plstore-encrypt-to 'E10A9B132DD86E93)
+(add-to-list 'plstore-encrypt-to "E10A9B132DD86E93")
 
 ;; diary file configs
 (setq diary-file "~/org/diary")

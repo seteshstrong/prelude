@@ -38,3 +38,4 @@ eln-cache/
 /oauth2-auto.plist
 /persist/org-generic-id--last-update-id-time
 /request/curl-cookie-jar
+/persist/org-gcal--sync-tokens

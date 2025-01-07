@@ -46,7 +46,7 @@
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 ;; defining org-agenda files
 (setq org-agenda-files (list "~/org/gcal.org"
-                             "~/org/i.org"
+                             "~/org/index.org"
                              "~/org/schedule.org"))
 ;; org notes location
 (setq org-default-notes-file "~/org/notes.org")
